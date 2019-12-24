@@ -11,3 +11,5 @@ D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProc
 D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\ShortWordDriver.dll
 D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\ShortWordDriver.pdb
 D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.csproj.CopyComplete
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\Xceed.Document.NET.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\Xceed.Words.NET.dll

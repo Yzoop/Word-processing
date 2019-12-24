@@ -38,6 +38,10 @@
       "frameworks": {
         "netstandard2.0": {
           "dependencies": {
+            "DocX": {
+              "target": "Package",
+              "version": "[1.5.0, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",

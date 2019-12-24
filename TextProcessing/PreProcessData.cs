@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Xceed.Words.NET;
 
 namespace TextProcessing
 {
@@ -28,13 +29,16 @@ namespace TextProcessing
                                                                             { 'M', 1000 }
                                                                         };
 
-        private static readonly char[] splitters = { '\t', '\n', ' ', '\r' };
+        private static readonly char[] spaceSplitters = { '\t', '\n', ' ', '\r' , '?', '!'};
         private const string STR_FORMAT_TXT = "txt", STR_FORMAT_DOCX = "docx", STR_FORMAT_DOC = "doc";
 
         public static string[] fileWordsSplit { get; private set; }
         public static string fullFileData;
         public static string filePath { get; set; }
         public static FileFormat_en fileFormat { get; private set; }
+        public static FileFormat_en savageFileFormat { get; private set; }
+
+        public static DocX docxManager; 
         //--------------------------------------------------------------------------------------------#
 
         /// <summary>
@@ -47,16 +51,41 @@ namespace TextProcessing
             switch(strFormat.ToLower())
             {
                 case STR_FORMAT_TXT:
-                    fileFormat = FileFormat_en.eTXT;
+                    fileFormat = savageFileFormat = FileFormat_en.eTXT;
                     break;
                 case STR_FORMAT_DOC:
-                    fileFormat = FileFormat_en.eDOCX;
+                    fileFormat = savageFileFormat = FileFormat_en.eDOCX;
                     break;
                 case STR_FORMAT_DOCX:
-                    fileFormat = FileFormat_en.eDOCX;
+                    fileFormat = savageFileFormat = FileFormat_en.eDOCX;
                     break;
                 default:
                     throw new FileFormatException();
+            }
+        }
+
+
+        public static void setSaveAs(FileFormat_en saveAs)
+        {
+            savageFileFormat = saveAs;
+        }
+
+
+        public static void setNewFullFileData(string data)
+        {
+            fullFileData = data;
+        }
+        
+        public static void changeTextAccordingToFormat(string oldText, string newText)
+        {
+            switch(fileFormat)
+            {
+                case FileFormat_en.eDOCX:
+                    docxManager.ReplaceText(oldText, newText);
+                    break;
+                case FileFormat_en.eTXT:
+                    fullFileData = fullFileData.Replace(oldText, newText);
+                    break;
             }
         }
 
@@ -97,8 +126,26 @@ namespace TextProcessing
 
         public static void setSpaceSplitText(string soloText)
         {
-            fileWordsSplit = (fullFileData = soloText).Split(splitters);
+            fileWordsSplit = (fullFileData = soloText).Split(spaceSplitters);
+        
         }
+
+
+        public static int getQuantityOfSentences()
+        {
+            int pointCounter = 0;
+            string textData = docxManager != null ? docxManager.Text : fullFileData;
+            foreach (char c in textData)
+            {
+                if (c.Equals('.') || c.Equals('!') ||c.Equals('?'))
+                {
+                    ++pointCounter;
+                }
+            }
+
+            return pointCounter;
+        }
+
 
         public static async void asyncRomanianNumbersToArab(Button buttonToEnable, RichTextBox richHistory, HistoryMessage message)    
         {
@@ -106,7 +153,9 @@ namespace TextProcessing
             {
                 List<string> romanianStrNumbers = new List<string>();
 
-                foreach (string word in fileWordsSplit)
+                string[] splitWords = fileWordsSplit == null ? docxManager.Text.Split(spaceSplitters) : fileWordsSplit;
+
+                foreach (string word in splitWords)
                 {
                     if (word.Length > 0)
                     {
@@ -118,12 +167,12 @@ namespace TextProcessing
                 }
                 romanianStrNumbers.Sort();
                 romanianStrNumbers.Reverse();
-                foreach(string romWord in romanianStrNumbers)
+                foreach (string romWord in romanianStrNumbers)
                 {
-                    fullFileData = fullFileData.Replace(romWord, DecodeRomanToArab(romWord).ToString());
+                    changeTextAccordingToFormat(romWord, DecodeRomanToArab(romWord).ToString());
+                    //fullFileData = fullFileData.Replace(romWord, DecodeRomanToArab(romWord).ToString());
                 }
-            }
-              );
+            });
             buttonToEnable.Enabled = true;
             HistoryWorker.appendLnToHistory(richHistory, message);
 

@@ -9,10 +9,23 @@
     ".NETStandard,Version=v2.0/": {
       "ShortWordDriver/1.0.0": {
         "dependencies": {
+          "DocX": "1.5.0",
           "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "ShortWordDriver.dll": {}
+        }
+      },
+      "DocX/1.5.0": {
+        "runtime": {
+          "lib/net40/Xceed.Document.NET.dll": {
+            "assemblyVersion": "1.5.0.0",
+            "fileVersion": "1.5.0.0"
+          },
+          "lib/net40/Xceed.Words.NET.dll": {
+            "assemblyVersion": "1.5.0.0",
+            "fileVersion": "1.5.0.0"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
@@ -28,6 +41,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "DocX/1.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rqstg1lt6pVHHLefCOiTxNevq5IHwuTJqhRoWN3m46lSsnaMgKpqlYbGyCUhZ9swlcCuBh45rfKj2Uaf08+NXw==",
+      "path": "docx/1.5.0",
+      "hashPath": "docx.1.5.0.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

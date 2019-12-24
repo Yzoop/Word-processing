@@ -328,6 +328,7 @@
             this.button_ChangeSimilarWords.TabIndex = 0;
             this.button_ChangeSimilarWords.Text = "Замена однокоренных и родственных слов";
             this.button_ChangeSimilarWords.UseVisualStyleBackColor = true;
+            this.button_ChangeSimilarWords.Click += new System.EventHandler(this.button_ChangeSimilarWords_Click);
             // 
             // groupBox2
             // 

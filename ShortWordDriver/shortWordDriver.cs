@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Xceed.Words.NET;
 
 namespace ShortWordDriver
 {
@@ -10,6 +11,9 @@ namespace ShortWordDriver
         public static readonly string STR_DLL_FULL_NAME = "ShortWordDriver.dll";
         private static readonly string SHORT_WORD_DATA_FILE_NAME = "база_коротких_слов.sw";
         public static List<ShortWord> shortWords = new List<ShortWord>();
+
+        public static DocX docxManager;
+        public static string txtData;
 
         public static async void asyncReadDataFromFile()
         {
@@ -46,12 +50,26 @@ namespace ShortWordDriver
         }
 
 
-        public static void asyncChangeInTextShortWords(ref string text)
+        public async static void asyncChangeShortWordsDocx()
         {
-            foreach (ShortWord shortWord in shortWords)
+            await Task.Run(() =>
             {
-                text = text.Replace(shortWord.shortKey, shortWord.fullValue);
-            }
+                foreach (ShortWord shortWord in shortWords)
+                {
+                    docxManager.ReplaceText(shortWord.shortKey, shortWord.fullValue);
+                }
+            });
+        }        
+        
+        public async static void asyncChangeShortWordsTxt()
+        {
+            await Task.Run(() =>
+            {
+                foreach (ShortWord shortWord in shortWords)
+                {
+                    txtData = txtData.Replace(shortWord.shortKey, shortWord.fullValue);
+                }
+            });
         }
     }
 

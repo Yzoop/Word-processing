@@ -2,6 +2,17 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
+      "DocX/1.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Xceed.Document.NET.dll": {},
+          "lib/net40/Xceed.Words.NET.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Xceed.Document.NET.dll": {},
+          "lib/net40/Xceed.Words.NET.dll": {}
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -29,6 +40,22 @@
     }
   },
   "libraries": {
+    "DocX/1.5.0": {
+      "sha512": "rqstg1lt6pVHHLefCOiTxNevq5IHwuTJqhRoWN3m46lSsnaMgKpqlYbGyCUhZ9swlcCuBh45rfKj2Uaf08+NXw==",
+      "type": "package",
+      "path": "docx/1.5.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "docx.1.5.0.nupkg.sha512",
+        "docx.nuspec",
+        "lib/net40/Xceed.Document.NET.dll",
+        "lib/net40/Xceed.Words.NET.dll",
+        "tools/install.ps1"
+      ]
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
@@ -176,6 +203,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "DocX >= 1.5.0",
       "NETStandard.Library >= 2.0.3"
     ]
   },
@@ -216,6 +244,10 @@
     "frameworks": {
       "netstandard2.0": {
         "dependencies": {
+          "DocX": {
+            "target": "Package",
+            "version": "[1.5.0, )"
+          },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
@@ -236,5 +268,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"DocX 1.5.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETStandard,Version=v2.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "DocX",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    }
+  ]
 }

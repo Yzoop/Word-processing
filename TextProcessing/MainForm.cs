@@ -10,6 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ShortWordDriver;
+using Xceed.Words.NET;
+
+
 
 namespace TextProcessing
 {
@@ -135,7 +138,7 @@ namespace TextProcessing
                 {
                     PreProcessData.setFileFormat(filePath.Split('.')[1]);
                 }
-                catch (FileFormatException fEx)
+                catch (FileFormatException)
                 {
                     HistoryWorker.appendLnToHistory(richTextBox_FileHistory, MSG_ERROR_FILE_READING_FORMAT);
                     Button_UploadFile.Enabled = true;
@@ -143,18 +146,19 @@ namespace TextProcessing
                 }
                 HistoryWorker.appendLnToHistory(richTextBox_FileHistory, MSG_STARTED_FILE_LOADING);
 
-                if (PreProcessData.fileFormat == FileFormat_en.eTXT)
+                switch (PreProcessData.fileFormat)
                 {
-                    startTxtReading(filePath);
-                }
-                else
-                {
-                    //TO-DO: startDocReading(...);
+                    case FileFormat_en.eTXT:
+                        await Task.Run(()=>startTxtReading(filePath));
+                        break;
+                    case FileFormat_en.eDOCX:
+                        await Task.Run(()=>startDocxReading(filePath));
+                        break;
                 }
 
                 HistoryWorker.appendLnToHistory(richTextBox_FileHistory, MSG_SUCCESS_FILE_LOADED);
 
-                FileInfoWorker.setFileInfo(filePath, Label_FileName, Label_FileSize);
+                FileInfoWorker.setFileInfo(filePath, Label_FileName, Label_FileSize, label_QuantitySentences);
             }
 
             Button_UploadFile.Enabled = true;
@@ -162,8 +166,28 @@ namespace TextProcessing
         }
 
 
+        private void startDocxReading(string filePath)
+        {
+            PreProcessData.docxManager = File.Exists(filePath) ? DocX.Load(filePath) : DocX.Create(filePath);
+           
+            PreProcessData.setNewFullFileData(String.Empty);
+        }
+
+
+        private void button_ChangeSimilarWords_Click(object sender, EventArgs e)
+        {
+            button_ChangeSimilarWords.Enabled = false;
+
+
+            button_ChangeSimilarWords.Enabled = true;
+        }
+
+
+
         private void startTxtReading(string filePath)
         {
+            PreProcessData.docxManager = null;
+
             StreamReader reader = new StreamReader(filePath);
             using (reader)
             {
@@ -178,14 +202,17 @@ namespace TextProcessing
             setButtonSaveChangesEnabled();
         }
 
+
         private void radioButton_TXT_CheckedChanged(object sender, EventArgs e)
         {
             setSelectedFormatRadioButtons(radioButton_TXT, radioButton_TXT.Checked);
             setButtonSaveChangesEnabled();
         }
 
+
         private void button_DecipherShortWords_Click(object sender, EventArgs e)
         {
+            button_DecipherShortWords.Enabled = false;
             HistoryWorker.appendLnToHistory(richTextBox_FileFormattingHistory, MSG_STARTED_SHORT_WORD_READING);
             try
             {
@@ -194,8 +221,21 @@ namespace TextProcessing
                     shortWordDriver.asyncReadDataFromFile();
                     HistoryWorker.appendLnToHistory(richTextBox_FileFormattingHistory, MSG_SUCCESS_SHORT_WORD_READING);
 
-                    shortWordDriver.asyncChangeInTextShortWords(ref PreProcessData.fullFileData);
-                    HistoryWorker.appendLnToHistory(richTextBox_FileFormattingHistory, MSG_SUCCESS_SHORT_WORD_REPLACING);
+                    switch(PreProcessData.fileFormat)
+                    {
+                        case FileFormat_en.eDOCX:
+                            shortWordDriver.txtData = String.Empty;
+                            shortWordDriver.docxManager = PreProcessData.docxManager;
+                            shortWordDriver.asyncChangeShortWordsDocx();
+                            HistoryWorker.appendLnToHistory(richTextBox_FileFormattingHistory, MSG_SUCCESS_SHORT_WORD_REPLACING);
+                            break;
+                        case FileFormat_en.eTXT:
+                            shortWordDriver.docxManager = null;
+                            shortWordDriver.txtData = PreProcessData.fullFileData;
+                            shortWordDriver.asyncChangeShortWordsTxt();
+                            HistoryWorker.appendLnToHistory(richTextBox_FileFormattingHistory, MSG_SUCCESS_SHORT_WORD_REPLACING);
+                            break;
+                    }
                 }
                 else
                 {
@@ -203,10 +243,12 @@ namespace TextProcessing
                     return;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 HistoryWorker.appendLnToHistory(richTextBox_FileFormattingHistory, MSG_ERROR_SHORT_WORD_READING);
             }
+
+            button_DecipherShortWords.Enabled = true;
         }
 
         private void setButtonSaveChangesEnabled()
@@ -225,13 +267,13 @@ namespace TextProcessing
 
         private void button_SaveChanges_Click(object sender, EventArgs e)
         {
-            switch(PreProcessData.fileFormat)
+            switch(PreProcessData.savageFileFormat)
             {
                 case FileFormat_en.eTXT:
                     asyncStartTxtWriting();
                     break;
                 case FileFormat_en.eDOCX:
-                    //TO-DO: save changes to docx
+                    asyncStartDocxWriting();
                     break;
             }
         }
@@ -257,6 +299,10 @@ namespace TextProcessing
 
         private void startTxtWriting()
         {
+            if (PreProcessData.docxManager != null)
+            {
+                PreProcessData.fullFileData = PreProcessData.docxManager.Text;
+            }
             StreamWriter writer = new StreamWriter(PreProcessData.filePath);
             try
             {
@@ -269,6 +315,24 @@ namespace TextProcessing
             {
                 HistoryWorker.appendLnToHistory(richTextBox_FileFormattingHistory, MSG_ERROR_FILE_REWRITING);
             }
+        }
+
+
+
+
+        private async void asyncStartDocxWriting()
+        {
+            await Task.Run(() =>
+            {
+                startDocxWriting();
+            });
+            HistoryWorker.appendLnToHistory(richTextBox_FileFormattingHistory, MSG_SUCCESS_FILE_WRITING);
+        }
+
+
+        private void startDocxWriting()
+        {
+            PreProcessData.docxManager.Save();
         }
 
 

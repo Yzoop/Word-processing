@@ -40,7 +40,7 @@ namespace TextProcessing
             return bytes.ToString() + " " + subName;            
         }
 
-        public static void setFileInfo(string path, Label lFileName, Label lFileSize)
+        public static void setFileInfo(string path, Label lFileName, Label lFileSize, Label lQuantityOfSentences)
         {
             FileInfo fileInfo = new FileInfo(path);
             
@@ -48,6 +48,7 @@ namespace TextProcessing
             {
                 lFileName.Text = fileInfo.Name;
                 lFileSize.Text = getFileStrSize(fileInfo.Length);
+                lQuantityOfSentences.Text = PreProcessData.getQuantityOfSentences().ToString();
             }
         }
     }

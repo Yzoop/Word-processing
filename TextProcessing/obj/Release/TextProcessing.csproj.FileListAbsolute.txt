@@ -1,0 +1,9 @@
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Release\TextProcessing.exe.config
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Release\TextProcessing.exe
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Release\TextProcessing.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.csprojAssemblyReference.cache
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.MainForm.resources
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.Properties.Resources.resources
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.csproj.GenerateResource.cache
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.exe
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.pdb

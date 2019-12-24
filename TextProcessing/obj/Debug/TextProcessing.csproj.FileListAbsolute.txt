@@ -1,0 +1,13 @@
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\TextProcessing.exe.config
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\TextProcessing.exe
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\TextProcessing.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.csprojAssemblyReference.cache
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.Properties.Resources.resources
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.csproj.GenerateResource.cache
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.exe
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.MainForm.resources
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.newFile_DialogForm.resources
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\ShortWordDriver.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\ShortWordDriver.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.csproj.CopyComplete

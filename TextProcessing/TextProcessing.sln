@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextProcessing", "TextProcessing.csproj", "{A9D37191-6625-4348-A408-218A0278D54C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortWordDriver", "..\ShortWordDriver\ShortWordDriver.csproj", "{F4E742FB-C453-433B-B890-102FF3A2D747}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9D37191-6625-4348-A408-218A0278D54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D37191-6625-4348-A408-218A0278D54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D37191-6625-4348-A408-218A0278D54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D37191-6625-4348-A408-218A0278D54C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4E742FB-C453-433B-B890-102FF3A2D747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E742FB-C453-433B-B890-102FF3A2D747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E742FB-C453-433B-B890-102FF3A2D747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E742FB-C453-433B-B890-102FF3A2D747}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89994B44-7098-4207-A8D6-60B66FB193D5}
+	EndGlobalSection
+EndGlobal

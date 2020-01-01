@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xceed.Words.NET;
 
@@ -8,66 +9,110 @@ namespace ShortWordDriver
 {
     public static class shortWordDriver
     {
+        private static readonly Regex shortWordRegex = new Regex(@"[а-я]{1}\.[а-я]{1}\.");
+       
         public static readonly string STR_DLL_FULL_NAME = "ShortWordDriver.dll";
-        private static readonly string SHORT_WORD_DATA_FILE_NAME = "база_коротких_слов.sw";
-        public static List<ShortWord> shortWords = new List<ShortWord>();
+
+
+        public static KeyValuePair<string, List<ShortWord>>[] sentencesWithShortWords;
 
         public static DocX docxManager;
         public static string txtData;
 
-        public static async void asyncReadDataFromFile()
+        public static bool isReadyForShortWord()
         {
-            await Task.Run(()=>readDataFromFile());
-        }
-
-        public static bool readyForRead()
-        {
-            return (shortWords != null && File.Exists(SHORT_WORD_DATA_FILE_NAME));
-        }
-
-        private static void readDataFromFile()
-        {
-            StreamReader reader = new StreamReader(SHORT_WORD_DATA_FILE_NAME);
-            if (reader != null)
+            if (sentencesWithShortWords.Length > 0)
             {
-                using (reader)
+                foreach (KeyValuePair<string, List<ShortWord>> pair in sentencesWithShortWords)
                 {
-                    try
+                    if (pair.Value == null)
                     {
-                        shortWords.Add(ShortWord.Parse(reader.ReadLine()));
-                    }
-                    catch(Exception ex)
-                    {
-                        //TO-DO act to the exception
+                        return false;
                     }
                 }
-                reader.Close();
+
+                return true;
+            }
+
+            return false ;
+        }
+
+
+        public static void changeShortWordInSentence(int sentenceId, ShortWord newShortWord)
+        {
+            if (sentenceId > 0 && sentenceId < sentencesWithShortWords.Length)
+            {
+                ShortWord savedWord = null;
+                foreach(ShortWord shortWord in sentencesWithShortWords[sentenceId].Value)
+                {
+                    if (shortWord.shortKey == newShortWord.shortKey)
+                    {
+                        savedWord = shortWord;
+                        break;
+                    }
+                }
+
+                if (savedWord != null)
+                {
+                    sentencesWithShortWords[sentenceId].Value.Remove(savedWord);
+                    sentencesWithShortWords[sentenceId].Value.Add(newShortWord);
+                }
             }
             else
             {
-                throw new Exception("Can not find '" + SHORT_WORD_DATA_FILE_NAME + "'");
+                throw new ArgumentException();
             }
         }
 
 
-        public async static void asyncChangeShortWordsDocx()
+        public async static void asyncChangeShortWordsDocx(List<ShortWord> sWords)
         {
             await Task.Run(() =>
             {
-                foreach (ShortWord shortWord in shortWords)
+                foreach (ShortWord w in sWords)
                 {
-                    docxManager.ReplaceText(shortWord.shortKey, shortWord.fullValue);
+                    docxManager.ReplaceText(w.shortKey, w.fullValue);
                 }
             });
-        }        
-        
-        public async static void asyncChangeShortWordsTxt()
+
+
+        }
+
+        public async static void asyncChangeShortWordsTxt(List<ShortWord> sWords)
         {
             await Task.Run(() =>
             {
-                foreach (ShortWord shortWord in shortWords)
+                foreach (ShortWord w in sWords)
                 {
-                    txtData = txtData.Replace(shortWord.shortKey, shortWord.fullValue);
+                    txtData = txtData.Replace(w.shortKey, w.fullValue);
+                }
+            });
+        }
+
+        private static KeyValuePair<string, List<ShortWord>> createPair(string key, List<ShortWord> value)
+        {
+            return new KeyValuePair<string, List<ShortWord>>(key, value);
+        }
+
+        public async static void asyncFindShortWordsInText(string[] sentences)
+        {
+            sentencesWithShortWords = new KeyValuePair<string, List<ShortWord>>[sentences.Length];
+
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < sentences.Length; i++)
+                {
+                    sentencesWithShortWords[i] = createPair(sentences[i], new List<ShortWord>());
+                
+                }
+
+                foreach(KeyValuePair<string,List <ShortWord >> pair in sentencesWithShortWords)
+                {
+                    MatchCollection matchCollection = shortWordRegex.Matches(pair.Key);
+                    foreach(Match match in matchCollection)
+                    {
+                        pair.Value.Add(new ShortWord(match.Value, ""));
+                    }
                 }
             });
         }
@@ -80,7 +125,7 @@ namespace ShortWordDriver
         public string shortKey { get; private set; }
         public string fullValue { get; private set; }
 
-        ShortWord(string key, string value)
+        public ShortWord(string key, string value)
         {
             shortKey = key;
             fullValue = value;
@@ -102,6 +147,11 @@ namespace ShortWordDriver
             }
 
             throw new Exception("Can not parse '" + strShortWord + "'");
+        }
+
+        public override string ToString()
+        {
+            return "'" + shortKey + "'" + ":" + "'" + fullValue + "'";
         }
     }
 }

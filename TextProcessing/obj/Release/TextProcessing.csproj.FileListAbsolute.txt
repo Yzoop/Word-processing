@@ -7,3 +7,12 @@ D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextPr
 D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.csproj.GenerateResource.cache
 D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.exe
 D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Release\PronounsDriver.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Release\ShortWordDriver.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Release\Xceed.Document.NET.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Release\Xceed.Words.NET.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Release\PronounsDriver.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Release\ShortWordDriver.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.newFile_DialogForm.resources
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.csproj.CopyComplete
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Release\TextProcessing.FormShowWhatChanges.resources

@@ -13,3 +13,6 @@ D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\ShortWor
 D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.csproj.CopyComplete
 D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\Xceed.Document.NET.dll
 D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\Xceed.Words.NET.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\PronounsDriver.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\bin\Debug\PronounsDriver.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\TextProcessing\obj\Debug\TextProcessing.FormShowWhatChanges.resources

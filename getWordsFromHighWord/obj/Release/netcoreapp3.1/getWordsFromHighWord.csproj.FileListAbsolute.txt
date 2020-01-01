@@ -1,0 +1,11 @@
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\bin\Release\netcoreapp3.1\getWordsFromHighWord.exe
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\bin\Release\netcoreapp3.1\getWordsFromHighWord.deps.json
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\bin\Release\netcoreapp3.1\getWordsFromHighWord.runtimeconfig.json
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\bin\Release\netcoreapp3.1\getWordsFromHighWord.runtimeconfig.dev.json
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\bin\Release\netcoreapp3.1\getWordsFromHighWord.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\bin\Release\netcoreapp3.1\getWordsFromHighWord.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\obj\Release\netcoreapp3.1\getWordsFromHighWord.csprojAssemblyReference.cache
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\obj\Release\netcoreapp3.1\getWordsFromHighWord.AssemblyInfoInputs.cache
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\obj\Release\netcoreapp3.1\getWordsFromHighWord.AssemblyInfo.cs
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\obj\Release\netcoreapp3.1\getWordsFromHighWord.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\getWordsFromHighWord\obj\Release\netcoreapp3.1\getWordsFromHighWord.pdb

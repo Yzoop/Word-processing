@@ -30,6 +30,7 @@ namespace TextProcessing
                                                                         };
 
         private static readonly char[] spaceSplitters = { '\t', '\n', ' ', '\r' , '?', '!'};
+        private static readonly string[] sentenceSplitters = new string[]{ ".\t", ".\n", ".\r", "?\r", "!\r", "!\n", "?\n", "! ", "? " };
         private const string STR_FORMAT_TXT = "txt", STR_FORMAT_DOCX = "docx", STR_FORMAT_DOC = "doc";
 
         public static string[] fileWordsSplit { get; private set; }
@@ -62,6 +63,16 @@ namespace TextProcessing
                 default:
                     throw new FileFormatException();
             }
+        }
+
+
+        public static string[] getSentences()
+        {
+            if (docxManager != null)
+            {
+                fullFileData = docxManager.Text;
+            }
+            return fullFileData.Split(sentenceSplitters, StringSplitOptions.RemoveEmptyEntries);
         }
 
 
@@ -126,8 +137,20 @@ namespace TextProcessing
 
         public static void setSpaceSplitText(string soloText)
         {
-            fileWordsSplit = (fullFileData = soloText).Split(spaceSplitters);
-        
+            fileWordsSplit = (fullFileData = soloText).Split(spaceSplitters, StringSplitOptions.RemoveEmptyEntries);
+            
+        }
+
+
+        public static string[] getSpaceSplitWords()
+        {
+            return (docxManager == null ? fullFileData : docxManager.Text).Split(spaceSplitters, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+
+        public static string[] getSpaceSplitWords(string text)
+        {
+            return text.Split(spaceSplitters, StringSplitOptions.RemoveEmptyEntries);
         }
 
 

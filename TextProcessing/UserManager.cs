@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ShortWordDriver;
 
 namespace TextProcessing
 {
@@ -40,19 +41,93 @@ namespace TextProcessing
             return bytes.ToString() + " " + subName;            
         }
 
-        public static void setFileInfo(string path, Label lFileName, Label lFileSize, Label lQuantityOfSentences)
+
+        public static void setDataFilesInfO(string pathPronouns, string pathWords, Label lPronouns, Label lHigh, Label LTiere)
+        {
+            FileInfo pronounsInfo = new FileInfo(pathPronouns);
+
+            string highLetters = "ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ";
+            
+            startAsyncCountWords(pathPronouns, lPronouns, (string s) => { return true; });
+            startAsyncCountWords(pathWords, LTiere, (string s) => { return s.Contains('-'); });
+            startAsyncCountWords(pathWords, lHigh, (string s) => { return highLetters.Contains(s[0]); });
+        }
+
+
+        private async static void startAsyncCountWords(string path, Label writeQtWords, Func<string, bool> isCorrect)
+        {
+            bool errorFaced = false;
+            int qtWords = 0;
+            await Task.Run(() =>
+            {
+                StreamReader reader = new StreamReader(path);
+                if (reader != null)
+                {
+                    string[] allWords;
+                    using (reader)
+                    {
+                        qtWords = (reader.ReadToEnd().
+                                          Split(new char[] { '\n', '\r' }, 
+                                                StringSplitOptions.RemoveEmptyEntries)).
+                                          Count(isCorrect);
+                    }
+                    reader.Close();
+                }
+                else
+                {
+                    errorFaced = true;
+                }
+            });
+
+            if (errorFaced)
+            {
+                writeQtWords.Text = "Ошибка";
+                writeQtWords.ForeColor = Color.Red;
+            }
+            else
+            {
+                writeQtWords.Text = qtWords.ToString();
+                writeQtWords.ForeColor = Color.Black;
+            }
+        }
+
+
+        public static void setFileInfo(string path, Label lFileName, Label lFileSize, Label lQuantityOfSentences, Label lTimeCreation, Label lFolderName, Label lWriteTime)
         {
             FileInfo fileInfo = new FileInfo(path);
             
             if (fileInfo != null)
             {
                 lFileName.Text = fileInfo.Name;
+                lTimeCreation.Text = fileInfo.CreationTime.ToString();
+                lFolderName.Text = fileInfo.DirectoryName;
+                lWriteTime.Text = fileInfo.LastWriteTime.ToString();
                 lFileSize.Text = getFileStrSize(fileInfo.Length);
                 lQuantityOfSentences.Text = PreProcessData.getQuantityOfSentences().ToString();
             }
         }
     }
 
+    public class ListBoxManageer
+    {
+        public static void addCLRangeToBox(ListBox box, HashSet<string> collection)
+        {
+            box.Items.Clear();
+            foreach(string val in collection)
+            {
+                box.Items.Add(val);
+            }
+        }    
+
+        public static void addCLRangeToBox(ListBox box, List<ShortWord> collection)
+        {
+            box.Items.Clear();
+            foreach(ShortWord val in collection)
+            {
+                box.Items.Add(val.ToString());
+            }
+        }
+    }
 
     public class LabelWorker
     {

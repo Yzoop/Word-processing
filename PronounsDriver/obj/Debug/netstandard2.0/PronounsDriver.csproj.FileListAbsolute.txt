@@ -1,0 +1,11 @@
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\bin\Debug\netstandard2.0\PronounsDriver.deps.json
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\bin\Debug\netstandard2.0\PronounsDriver.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\obj\Debug\netstandard2.0\PronounsDriver.AssemblyInfoInputs.cache
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\obj\Debug\netstandard2.0\PronounsDriver.AssemblyInfo.cs
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\bin\Debug\netstandard2.0\PronounsDriver.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\obj\Debug\netstandard2.0\PronounsDriver.csprojAssemblyReference.cache
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\obj\Debug\netstandard2.0\PronounsDriver.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\obj\Debug\netstandard2.0\PronounsDriver.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\bin\Debug\netstandard2.0\ShortWordDriver.dll
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\bin\Debug\netstandard2.0\ShortWordDriver.pdb
+D:\Projects\Freelance\Text_Word_Decode\Project\PronounsDriver\obj\Debug\netstandard2.0\PronounsDriver.csproj.CopyComplete
